@@ -1,0 +1,33 @@
+.youtubeDirective { padding: 5px; }
+.youtubeDirective .searchInput {
+    border: medium none;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 2px 0 #000000;
+    height: 20px;
+    padding: 8px;
+    width: 200px;
+}
+
+.youtubeDirective .acResult {
+    height: 0;
+    box-shadow: 0 0 2px 0 #000000;
+    background: #FFFFFF;
+    border-top: none;
+    left: 5px;
+    position: relative;
+    top: -1px;
+    width: 200px;
+    overflow-y: scroll;
+    transition: height .5s;
+}
+
+.youtubeDirective .acResult.hasItem {
+    height: 200px;
+}
+
+.youtubeDirective .acResult .acItem {
+    padding: 3px;
+    height: 20px; line-height: 20px; overflow: hidden; cursor: pointer;
+}
+
+.youtubeDirective .acResult .acItem:hover { background: #EAEAEA; }
