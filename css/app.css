@@ -1,6 +1,6 @@
 .youtubeDirective { padding: 5px; }
 .youtubeDirective .searchInput {
-    border: medium none;
+    border: none;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 0 2px 0 #000000;
     height: 20px;
@@ -31,3 +31,4 @@
 }
 
 .youtubeDirective .acResult .acItem:hover { background: #EAEAEA; }
+.youtubeDirective #searchPreview { height: 200px; width: 400px; background: red; position: relative; left: 216px; top: -36px; }

@@ -1,6 +1,22 @@
 'use strict';
 
-angular.module('myApp.directives', []).
+/* Directives */
+
+angular.module('myApp.directives', []).directive('player', function (YoutubeService) {
+    return {
+        restrict:'A',
+        link:function (scope, element, attrs) {
+            console.log(element);
+            var interVal = setInterval(function() {
+                console.log('ss',YoutubeService);
+                if (YoutubeService.ready) {
+                    YoutubeService.bindVideoPlayer(element[0].id);
+                    clearInterval(interVal);
+                }
+            }, 2000);
+        }
+    };
+}).
     directive("youtubeSearch", function($http, YoutubeService) {
         return {
             restrict: "E",
@@ -14,6 +30,7 @@ angular.module('myApp.directives', []).
                     '<div class="acResult" ng-class="{hasItem: items.length}">' +
                         '<div class="acItem" ng-repeat="item in items" ng-click="setSelectedItem(item)"> {{item.title}}</div>' +
                     '</div>' +
+                    '<div id="searchPreview" player="true"></div>' +
                 '</div>',
             replace: true,
             transclude: false,
@@ -30,7 +47,7 @@ angular.module('myApp.directives', []).
                 scope.setSelectedItem = function(item) {
                     var searchElement = document.getElementsByClassName(attrs.targetModelClass)[0];
                     angular.element(searchElement).scope().setSelectedVideo(item.player.default);
-                }
+                };
             }
         }
     });
