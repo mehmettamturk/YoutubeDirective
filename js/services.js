@@ -6,6 +6,14 @@ angular.module('myApp.services', []).
 angular.module('myApp.services').factory('YoutubeService', function($http, $window) {
     var YoutubeService = {};
 
+    YoutubeService.ready = false;
+    YoutubeService.playerId = null;
+    YoutubeService.player = null;
+    YoutubeService.videoId = '5NV6Rdv1a3I';
+    YoutubeService.playerHeight = '390';
+    YoutubeService.playerWidth = '640';
+    YoutubeService.quality = 'hd720';
+
     YoutubeService.search = function(searchKey, cb) {
         var url = 'https://gdata.youtube.com/feeds/api/videos?q=' + searchKey + '&v=2&alt=jsonc&callback=JSON_CALLBACK';
         $http.jsonp(url).success(function(data) {
@@ -16,6 +24,11 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
     $window.onYouTubeIframeAPIReady = function () {
         console.log('Youtube API is ready');
         YoutubeService.ready = true;
+    };
+
+    $window.onPlayerReady = function() {
+        YoutubeService.player.playVideo();
+
     };
 
     YoutubeService.bindVideoPlayer = function (elementId) {
@@ -40,8 +53,7 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
             width: this.playerWidth,
             videoId: this.videoId,
             events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
+                'onReady': onPlayerReady
             }
         });
     };
