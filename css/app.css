@@ -21,8 +21,15 @@
     transition: height .5s;
 }
 
+.youtubeDirective .acResult.hasPreview { width: 626px; }
+
 .youtubeDirective .acResult.hasItem {
     height: 200px;
+}
+
+.youtubeDirective .items {
+    width: 200px;
+    float: left;
 }
 
 .youtubeDirective .acResult .acItem {
@@ -31,4 +38,6 @@
 }
 
 .youtubeDirective .acResult .acItem:hover { background: #EAEAEA; }
-.youtubeDirective #searchPreview { height: 200px; width: 400px; background: red; position: relative; left: 216px; top: -36px; }
+
+.youtubeDirective .acResult .acItem img { height: 20px; width: 20px; }
+.youtubeDirective #searchPreview { height: 200px; width: 400px; position: fixed; left: 230px; }

@@ -9,7 +9,7 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
     YoutubeService.ready = false;
     YoutubeService.playerId = null;
     YoutubeService.player = null;
-    YoutubeService.videoId = '5NV6Rdv1a3I';
+    YoutubeService.videoId = 'm4gywHHAAOI';
     YoutubeService.playerHeight = '390';
     YoutubeService.playerWidth = '640';
     YoutubeService.quality = 'hd720';
@@ -22,7 +22,6 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
     };
 
     $window.onYouTubeIframeAPIReady = function () {
-        console.log('Youtube API is ready');
         YoutubeService.ready = true;
     };
 
@@ -43,7 +42,6 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
                 this.player.destroy();
 
             this.player = this.createPlayer();
-            console.log(this.player)
         }
     };
 
@@ -57,6 +55,11 @@ angular.module('myApp.services').factory('YoutubeService', function($http, $wind
             }
         });
     };
+
+    YoutubeService.playVideo = function(id) {
+        this.player.loadVideoById({videoId:id,  suggestedQuality:'small'});
+    };
+
 
     return YoutubeService;
 });
