@@ -21,7 +21,7 @@
     transition: height .5s;
 }
 
-.youtubeDirective .acResult.hasPreview { width: 626px; }
+.youtubeDirective .acResult.hasPreview { width: 626px; overflow: hidden; }
 
 .youtubeDirective .acResult.hasItem {
     height: 200px;

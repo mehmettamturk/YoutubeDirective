@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('myApp.controllers', []).controller('MyCtrl1', ['$scope', function($scope) {
+angular.module('myApp.controllers', []).controller('MyCtrl1', ['$scope', '$http', function($scope, $http) {
     console.log('Controller Loaded.');
 
-    $scope.selectedYoutubeId = 's';
+    $scope.selectedYoutubeId = '';
 
     $scope.setSelectedVideo = function(id) {
         $scope.selectedYoutubeId = id;
-
-    }
+    };
 }]);
