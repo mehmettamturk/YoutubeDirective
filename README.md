@@ -5,7 +5,18 @@ An Angular.js module to search videos from Youtube.
 
 ##How To Use
 
-In first step, you need to add YoutubeModule.js file to your project.
+In first step, you need to add YoutubeModule.js file to your project and add youtube iframe_api script.
+
+```html
+<script src="js/YoutubeModule.js"></script>
+<script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
+```
+
 Then you need to inject YoutubeModule from your app file as dependency.
 
 ```javascript
