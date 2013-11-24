@@ -1,5 +1,8 @@
-Youtube Test.
-<youtube-search target-model-class="targetModelClassName" preview="true"></youtube-search>
+<label>Video:</label>
+<input class="targetModelClassName" ng-model="selectedYoutubeId" placeholder="Paste url or click search"/>
+<span class="searchButton" ng-click="showSearch = !showSearch"></span>
 
-Selected Youtube Video:
-<input class="targetModelClassName" ng-model="selectedYoutubeId"/>
+<div ng-show="showSearch" class="searchBoxContainer">
+    <youtube-search target-model-class="targetModelClassName"></youtube-search>
+</div>
+

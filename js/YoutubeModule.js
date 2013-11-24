@@ -26,18 +26,23 @@ YoutubeModule.directive("youtubeSearch", function($http, YoutubeService) {
                 '<input class="searchInput" ng-model="searchKey" placeholder="Write to Search..."/>' +
                 '<div class="acResult" ng-class="{hasItem: items.length, hasPreview: hasPreview}">' +
                     '<div class="items">' +
-                        '<div class="acItem" ng-repeat="item in items" ng-click="setSelectedItem(item)">' +
+                        '<div class="acItem" ng-repeat="item in items" ng-click="showPreviev(item)" ng-class="{selected: selectedItem.id == item.id}">' +
                             '<img src="{{item.thumbnail.sqDefault}}"/>' +
                             '{{item.title}}' +
                         '</div>' +
                     '</div>' +
-                '<div id="searchPreview" player="true" ng-show="searchKey.length > 0"></div>' +
+                '</div>' +
+                '<div class="rightPanel">' +
+                    '<div id="searchPreview" player="true" ng-show="searchKey.length > 0 && hasPreview"></div>' +
+                    '<button class="cancel" ng-click="cancel()"> Cancel </button>' +
+                    '<button class="addVideo" ng-click="setSelectedItem(item)" ng-show="items.length"> Add Video </button>' +
                 '</div>' +
             '</div>',
         replace: true,
         transclude: false,
         link: function (scope, element, attrs) {
             scope.hasPreview = attrs.preview == 'true';
+            scope.selectedItem = {};
 
             scope.$watch('searchKey', function() {
                 if(scope.searchKey && scope.searchKey.length > 2)
@@ -48,15 +53,21 @@ YoutubeModule.directive("youtubeSearch", function($http, YoutubeService) {
                     scope.items = [];
             });
 
-            scope.setSelectedItem = function(item) {
+            scope.setSelectedItem = function() {
                 var searchElement = document.getElementsByClassName(attrs.targetModelClass)[0];
-                angular.element(searchElement).scope().setSelectedVideo(item.player.default);
-                YoutubeService.playVideo(item.id);
+                angular.element(searchElement).scope().setSelectedVideo(scope.selectedItem.player.default);
+                angular.element(searchElement).scope().showSearch = false;
 
             };
 
-            scope.preview = function(id) {
-                YoutubeService.playVideo();
+            scope.showPreviev = function(item) {
+                scope.selectedItem = item;
+                YoutubeService.playVideo(item.id);
+            };
+
+            scope.cancel = function() {
+                var searchElement = document.getElementsByClassName(attrs.targetModelClass)[0];
+                angular.element(searchElement).scope().showSearch = false;
             };
         }
     }

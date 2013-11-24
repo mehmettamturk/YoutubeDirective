@@ -1,43 +1,17 @@
-.youtubeDirective { padding: 5px; }
-.youtubeDirective .searchInput {
-    border: none;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 0 2px 0 #000000;
-    height: 20px;
-    padding: 8px;
-    width: 200px;
-}
-
-.youtubeDirective .acResult {
-    height: 0;
-    box-shadow: 0 0 2px 0 #000000;
-    background: #FFFFFF;
-    border-top: none;
-    left: 5px;
-    position: relative;
-    top: -1px;
-    width: 200px;
-    overflow-y: scroll;
-    transition: height .5s;
-}
-
-.youtubeDirective .acResult.hasPreview { width: 626px; overflow: hidden; }
-
-.youtubeDirective .acResult.hasItem {
-    height: 200px;
-}
-
-.youtubeDirective .items {
-    width: 200px;
-    float: left;
-}
-
-.youtubeDirective .acResult .acItem {
-    padding: 3px;
-    height: 20px; line-height: 20px; overflow: hidden; cursor: pointer;
-}
-
+input { width: 290px; height: 40px; padding: 5px 10px; border: 2px solid #DDDDDD; font-size: 20px; }
+.searchButton { display: inline-block; height: 40px; width: 40px; cursor: pointer; background: url('../img/search.png'); position: relative; top: 12px; }
+.searchBoxContainer { position: absolute; width: 720px; height: 600px; background: #F5F5F5; padding: 20px; box-shadow: 0 0 2px 2px #DDDDDD; border-radius: 5px; margin: auto; top: 0; left: 0; bottom: 0; right: 0; }
+.youtubeDirective { padding: 5px; width: 100%; background: #F5F5F5; }
+.youtubeDirective .searchInput { width: 680px; }
+.youtubeDirective .acResult { overflow-y: scroll; height: 500px; float: left; width: 705px; }
+.youtubeDirective .acResult.hasPreview { height: 550px; width: 405px; }
+.youtubeDirective .rightPanel { float: left; width: 315px; }
+.youtubeDirective .acResult .acItem { padding: 5px; background: white; text-align: center; margin: 5px 7px 0 0; height: 149px; width: 119px; line-height: 20px; overflow: hidden; cursor: pointer; border: 1px solid #DDDDDD; float: left; }
+.youtubeDirective .acResult.hasPreview .acItem { width: 110px; height: 165px; }
+.youtubeDirective .acResult .acItem.selected { background: #DDDDDD; box-shadow: 1px 1px 0 0 rgba(0,0,0,0.2); }
+.youtubeDirective .rightPanel button { border: none; border-radius: 5px; margin: 10px; height: 40px; padding: 12px 38px; float: left; }
+.youtubeDirective .rightPanel .cancel { background: transparent; color: rgba(0,0,0,0.5); border: 2px solid rgba(0,0,0,0.25); font-weight: bold; }
+.youtubeDirective .rightPanel .addVideo { background: #54AF77; color: white; }
 .youtubeDirective .acResult .acItem:hover { background: #EAEAEA; }
-
-.youtubeDirective .acResult .acItem img { height: 20px; width: 20px; }
-.youtubeDirective #searchPreview { height: 200px; width: 400px; position: fixed; left: 230px; }
+.youtubeDirective .acResult .acItem img { height: 90px; width: 90px; margin: 0 auto; display: block; }
+.youtubeDirective #searchPreview { height: 200px; width: 290px; margin: 10px; }
