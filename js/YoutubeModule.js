@@ -9,7 +9,7 @@ YoutubeModule.directive('player', function (YoutubeService) {
                     YoutubeService.bindVideoPlayer(element[0].id);
                     clearInterval(interVal);
                 }
-            }, 2000);
+            }, 1000);
         }
     };
 });
@@ -78,9 +78,9 @@ YoutubeModule.factory('YoutubeService', function($http, $window) {
     var YoutubeService = {
         ready: false,
         playerId: null,
-        videoId: '',
+        videoId: 'no',
         playerHeight: '390',
-        playerWidth: 640,
+        playerWidth: '640',
         quality: 'hd720'
     };
 
@@ -101,7 +101,6 @@ YoutubeModule.factory('YoutubeService', function($http, $window) {
 
     YoutubeService.bindVideoPlayer = function (elementId) {
         YoutubeService.playerId = elementId;
-        YoutubeService.videoId = 'ss',
         YoutubeService.loadPlayer();
     };
 
