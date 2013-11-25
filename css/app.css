@@ -15,3 +15,4 @@ input { width: 290px; height: 40px; padding: 5px 10px; border: 2px solid #DDDDDD
 .youtubeDirective .acResult .acItem:hover { background: #EAEAEA; }
 .youtubeDirective .acResult .acItem img { height: 90px; width: 90px; margin: 0 auto; display: block; }
 .youtubeDirective #searchPreview { height: 200px; width: 290px; margin: 10px; }
+.youtubeDirective .hidden { display: none; }

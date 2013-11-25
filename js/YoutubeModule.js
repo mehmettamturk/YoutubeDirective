@@ -1,11 +1,36 @@
+/**
+ * Config file for youtube player.
+ * @type {{videoId: string, playerHeight: number, playerWidth: number, quality: string}}
+ *
+ * Quality options: 'small', 'medium', 'large', 'hd720', 'hd1080', 'highres', 'default'
+ */
+var config = {
+    videoId: 'cVU8rS7JKNM', // Initial video id.
+    playerHeight: 390, // Youtube player height.
+    playerWidth: 640, // Youtube player width.
+    quality: 'hd720' // Youtube player video quality if video has that quality.
+};
+
+
+/**
+ *
+ * @type {*|module}
+ */
 var YoutubeModule = angular.module('YoutubeModule', []);
 
 YoutubeModule.directive('player', function (YoutubeService) {
     return {
         restrict:'A',
-        link:function (scope, element, attrs) {
+        link:function (scope, element) {
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
             var interVal = setInterval(function() {
                 if (YoutubeService.ready) {
+                    console.log(element[0])
                     YoutubeService.bindVideoPlayer(element[0].id);
                     clearInterval(interVal);
                 }
@@ -33,7 +58,7 @@ YoutubeModule.directive("youtubeSearch", function($http, YoutubeService) {
                     '</div>' +
                 '</div>' +
                 '<div class="rightPanel">' +
-                    '<div id="searchPreview" player="true" ng-show="searchKey.length > 0 && hasPreview"></div>' +
+                    '<div id="searchPreview" player="true" ng-class="{hidden: !searchKey.length && !hasPreview}"></div>' +
                     '<button class="cancel" ng-click="cancel()"> Cancel </button>' +
                     '<button class="addVideo" ng-click="setSelectedItem(item)" ng-show="items.length"> Add Video </button>' +
                 '</div>' +
@@ -42,6 +67,7 @@ YoutubeModule.directive("youtubeSearch", function($http, YoutubeService) {
         transclude: false,
         link: function (scope, element, attrs) {
             scope.hasPreview = attrs.preview == 'true';
+            console.log(scope.hasPreview)
             scope.selectedItem = {};
 
             scope.$watch('searchKey', function() {
@@ -68,6 +94,7 @@ YoutubeModule.directive("youtubeSearch", function($http, YoutubeService) {
             scope.cancel = function() {
                 var searchElement = document.getElementsByClassName(attrs.targetModelClass)[0];
                 angular.element(searchElement).scope().showSearch = false;
+                YoutubeService.stopVideo();
             };
         }
     }
@@ -78,10 +105,10 @@ YoutubeModule.factory('YoutubeService', function($http, $window) {
     var YoutubeService = {
         ready: false,
         playerId: null,
-        videoId: 'no',
-        playerHeight: '390',
-        playerWidth: '640',
-        quality: 'hd720'
+        videoId: config.videoId,
+        playerHeight: config.playerHeight,
+        playerWidth: config.playerWidth,
+        quality: config.quality
     };
 
     YoutubeService.search = function(searchKey, cb) {
@@ -106,7 +133,7 @@ YoutubeModule.factory('YoutubeService', function($http, $window) {
 
     YoutubeService.loadPlayer = function () {
         // API ready
-        if (this.ready && this.playerId && this.videoId) {
+        if (this.ready && this.playerId) {
             if(this.player)
                 this.player.destroy();
 
@@ -126,7 +153,13 @@ YoutubeModule.factory('YoutubeService', function($http, $window) {
     };
 
     YoutubeService.playVideo = function(id) {
-        this.player.loadVideoById({videoId:id,  suggestedQuality:'small'});
+        if (this.player)
+            this.player.loadVideoById({videoId:id,  suggestedQuality:'small'});
+    };
+
+    YoutubeService.stopVideo = function() {
+        if (this.player)
+            this.player.stopVideo();
     };
 
     return YoutubeService;
